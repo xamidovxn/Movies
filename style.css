@@ -1,0 +1,16 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.container {
+   width: 1120px !important;
+   padding: 0 20px;
+}
+
+.wrapper {
+   display: grid;
+   grid-template-columns: auto auto;
+   gap: 10px;
+}
