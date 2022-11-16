@@ -34,12 +34,12 @@
          <div class="container">
             <div class="row">
                <div class="col-md-3 p-3 bg-light">
-                  <form action="#">
+                  <form action="#" id="submitForm">
                      <label class="w-75 fs-5 my-2">
                         Enter film name
                         <input type="text" class="form-control p-3" placeholder="Enter film name" id="filmName">
                      </label>
-                     <label for="" class="w-75 fs-5 my-2">
+                     <label for="filmRating" class="w-75 fs-5 my-2">
                         Enter film rating
                         <input type="number" min="1" max="10" class="form-control p-3" placeholder="Enter film rating"
                            id="filmRating">
@@ -51,16 +51,22 @@
                         SEARCH
                      </button>
                   </form>
+
+                  <div class="card card-res d-none p-3 w-75 my-3">
+                     <h4 class="text-success" id="res">
+                     
+                     </h4>
+                  </div>
+
                </div>
 
-               <div class="col-md-7 p-3 bg-light">
+               <div class="col-md-7 p-3 bg-light d-flex justify-content-center align-items-center flex-column">
                   
                   <div class="wrapper">
-
+                     
                   </div>
 
                   <div class="col p-3 bg-light">
-
                   </div>
                </div>
 

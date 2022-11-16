@@ -1,6 +1,6 @@
 "use strict"
 
-movies.splice(50);
+movies.splice(10);
 
 const Allmovies = movies.map((movies) => {
    return {
@@ -18,8 +18,6 @@ const Allmovies = movies.map((movies) => {
    }
 })
 
-console.log(Allmovies);
-
 function renderAllmovies() {
    Allmovies.forEach((el) => {
       const card = document.createElement('div');
@@ -32,19 +30,19 @@ function renderAllmovies() {
                            </h4>
                            <ul class="list-unstyled">
                               <li>
-                                 <strong>Year: </strong>
+                                 <strong>Year: ${el.year} </strong>
                               </li>
                               <li>
-                                 <strong>Language: </strong>
+                                 <strong>Language: ${el.lang} </strong>
                               </li>
                               <li>
-                                 <strong>Rating: </strong>
+                                 <strong>Rating: ${el.rating} </strong>
                               </li>
                               <li>
-                                 <strong>Category: </strong>
+                                 <strong>Category: ${el.categories} </strong>
                               </li>
                               <li>
-                                 <strong>Runtime: </strong>
+                                 <strong>Runtime: ${el.time} </strong>
                               </li>
                            </ul>
 
@@ -59,11 +57,99 @@ function renderAllmovies() {
                               <button class="btn text-light m-1 bg-warning">
                                  Add bookmark
                               </button>
-                           </div>
-       
-      `;
+                           </div>`;
       $('.wrapper').append(card)
    })
 }
 
 renderAllmovies()
+
+
+// -------------- FIND FILM FUNCTION ---------------- //
+
+const findFilm = (regexp, filmRating) => {
+   return Allmovies.filter((film) => {
+      return film.title.match(regexp) && film.rating >= filmRating;
+   })
+}
+
+
+$('#submitForm').addEventListener('submit', () => {
+
+   $('.wrapper').innerHTML = `<div class="d-flex"><span class="loader"></span></div>`
+
+   const searchValue = $('#filmName').value;
+   const filmRating = $('#filmRating').value;
+   const regexp = new RegExp(searchValue, "gi");
+
+   const searchResult = findFilm(regexp, filmRating);
+
+   setTimeout(() => {
+      if (searchResult.length > 0) {
+         searchRender(searchResult)
+         $('.card-res').classList.remove('d-none')
+         $('#res').innerHTML = `<strong>${searchResult.length} ta ma'lumot topildi! </strong>`
+
+         if (searchValue.length === 0) {
+            $('.card-res').classList.add('d-none')
+         }
+
+      } else {
+         $('#res').innerHTML = `<strong>${searchResult.length} ta ma'lumot topildi! </strong>`
+         $('.wrapper').innerHTML = `<h1 class="text-danger">MA'LUMOT TOPILMADI!</h1>`;
+      }
+   }, 2000);
+
+})
+
+function searchRender(data = []) {
+
+   $('.wrapper').innerHTML = "";
+
+   data.forEach((el) => {
+      const card = document.createElement('div');
+      card.classList.add('shadow-lg', 'card')
+      card.innerHTML = `
+                        <img src="${el.minImg}" alt="img" class="card__img">
+                        <div class="card__body p-2">
+                           <h4 class="card__title">
+                              ${el.title}
+                           </h4>
+                           <ul class="list-unstyled">
+                              <li>
+                                 <strong>Year: ${el.year} </strong>
+                              </li>
+                              <li>
+                                 <strong>Language: ${el.lang} </strong>
+                              </li>
+                              <li>
+                                 <strong>Rating: ${el.rating} </strong>
+                              </li>
+                              <li>
+                                 <strong>Category: ${el.categories} </strong>
+                              </li>
+                              <li>
+                                 <strong>Runtime: ${el.time} </strong>
+                              </li>
+                           </ul>
+
+                           <div class="d-flex">
+                              <button class="btn text-light m-1 bg-danger">
+                                 Trailers
+                              </button>
+                              <button class="btn text-light m-1 bg-success">
+
+                                 Read more . . .
+                              </button>
+                              <button class="btn text-light m-1 bg-warning">
+                                 Add bookmark
+                              </button>
+                           </div>`;
+      $('.wrapper').append(card)
+   })
+}
+
+
+
+
+
