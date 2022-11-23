@@ -22,7 +22,6 @@ const createElement = (nameTag, nameClass, content) => {
    } else {
       console.warn('fill HTML content')
    }
-   console.log(div);
 
    return div;
 }
