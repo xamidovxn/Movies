@@ -1,10 +1,7 @@
-const $ = function (selector) {
-   return document.querySelector(selector)
-}
+// ====================== COSTUM DOM SELECTOR ============================= //
 
-const $$ = function (selector) {
-   return document.querySelectorAll(selector)
-}
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
 
 // ======================= DYNAMIC CREATE_ELEMENT =========================== //
 

@@ -16,7 +16,8 @@ const Allmovies = movies.map((movies) => {
       minImg: movies.smallThumbnail,
       rating: movies.imdbRating
    }
-})
+});
+
 
 function renderAllmovies() {
    Allmovies.forEach((el) => {
@@ -51,14 +52,14 @@ function renderAllmovies() {
                               ">
                                  Trailers
                               </a>
-                              <a class="btn text-light m-1 bg-success">
+                              <a class="btn text-light m-1 bg-success" data-success="${el.id}">
                                  Read more
                               </a>
-                              <a class="btn text-light m-1 bg-warning">
+                              <a class="btn text-light m-1 bg-warning" data-danger="${el.id}">
                                  Add bookmark
                               </a>
                            </div>`;
-      $('.wrapper').append(card)
+      $('.wrapper').appendChild(card)
    })
 }
 
@@ -161,28 +162,161 @@ function searchRender(data = []) {
                                  <strong>Runtime: ${el.time} </strong>
                               </li>
                            </ul>
-
-                           <div class="d-flex">
-                           <a href="${el.link}" target="_blank" class="btn text-light m-1 bg-danger
-                           ">
-                              Trailers
-                           </a>
-                           <a class="btn text-light m-1 bg-success">
-                              Read more
-                           </a>
-                           <a class="btn text-light m-1 bg-warning">
-                              Add bookmark
-                           </a>
-                           </div>`;
+                        </div>`
       $('.wrapper').append(card)
    })
 }
 
-$('.wrapper').addEventListener('click', (e) => {
-   if (e.target.classList.contains("bg-success")) {
-      console.log(e.target.textContent);
+// -------------------- SHOW MODAL ---------------------- //
+
+$('.read__more').addEventListener('click', (e) => {
+   $('.read__body').innerHTML = "";
+   if (e.target.classList.contains("bg-danger")) {
+      $('.read__more').classList.add('swipe');
    }
 })
 
+const closeIcon = () => {
+   $('.wrapper').addEventListener('click', (e) => {
+      if (e.target.classList.contains("bg-success")) {
+         $('.read__more').classList.remove('swipe');
+         const id = e.target.getAttribute("data-success");
+         BtniD(id);
+      }
+   })
+}
+closeIcon();
 
+// ------------------------------ READ MORE ============================== //
 
+function BtniD(id) {
+   const btn = Allmovies.filter(item => {
+      return item.id == id;
+   });
+   RenderId(btn);
+}
+
+function RenderId(data = []) {
+   data.forEach((el) => {
+      const card = document.createElement('div');
+      card.classList.add('card', 'shadow');
+      card.innerHTML =
+
+         `<div class="d-flex read">
+         <img src="${el.minImg}" alt="img" width="100">
+         
+         <div class="p-2>
+            <h4 class="card__title"> <strong>Title: </strong> ${el.title} </h4>
+
+         <ul class="list-unstyled">
+            <li>
+               <strong>Year: </strong> ${el.year};
+            </li>
+
+            <li>
+               <strong>Language: </strong> ${el.lang};
+            </li>
+
+            <li>
+               <strong>Rating: </strong> ${el.rating};
+            </li>
+
+            <li>
+               <strong>Categories: </strong> ${el.categories};
+            </li>
+
+            <li>
+               <strong>Time: </strong> ${el.time};
+            </li>
+
+            <li>
+               <strong>Summary: </strong> ${el.summary}
+            </li>
+            
+         </ul>
+      </div>
+   </div>`
+
+      $('.read__body').appendChild(card);
+
+   });
+}
+
+//  -------------------------- BOOKMARK ------------------------ //
+
+const bookmark =[];
+
+$('.wrapper').addEventListener('click', (e) => {
+   if (e.target.classList.contains('bg-warning')) {
+      $('.bookmark').classList.remove('swipe');
+      const id = e.target.getAttribute('data-danger');
+      BtniD(id);
+   }
+
+   function BtniD(id) {
+      const datas = Allmovies.filter(item => {
+         return item.id == id;
+      });
+      bookmarkId(datas);
+   }
+
+})
+
+function bookmarkId(data = []) {
+   data.forEach((el) => {
+      const div = document.createElement('div')
+      div.classList.add('shadow', 'card')
+      div.innerHTML = `
+      
+      <div class="d-flex read">
+      <img src="${el.minImg}" alt="img" style="width: 150px; height: 150px">
+      
+      <div class="p-2">
+         <h4 class="card__title"> <strong>Title: </strong> ${el.title} </h4>
+
+      <ul class="list-unstyled list-group">
+         <li class="list-group-item">
+            <strong>Year: </strong> ${el.year};
+         </li>
+
+         <li class="list-group-item">
+            <strong>Language: </strong> ${el.lang};
+         </li>
+
+         <li class="list-group-item">
+            <strong>Rating: </strong> ${el.rating};
+         </li>
+
+         <li class="list-group-item">
+            <strong>Categories: </strong> ${el.categories};
+         </li>
+
+         <li class="list-group-item">
+            <strong>Time: </strong> ${el.time};
+         </li>
+
+         <li class="list-group-item">
+            <strong>Summary: </strong> ${el.summary}
+         </li>
+         
+      </ul>
+   </div>
+</div> `;
+
+      $('.bookmark-box').appendChild(div);
+   });
+}
+
+$('.bookmark__close').addEventListener('click', (e) => {
+   $('.bookmark-box').innerHTML = "";
+
+   if (e.target.classList.contains('bookmark__close')) {
+      $('.bookmark').classList.add('swipe');
+   }
+})
+
+// ------- animate css example ----------------- //
+
+// $('.olga').addEventListener('click', (e) => {
+//    $('.bookmark__close').classList.add('animate')
+// })

@@ -3,6 +3,7 @@
    padding: 0;
    box-sizing: border-box;
    scroll-behavior: smooth;
+   transition: all linear 0.8s;
 }
 
 .container {
@@ -15,7 +16,6 @@
    grid-template-columns: auto auto;
    /* grid-template-columns: repeat(Auto-fill, minmax(320px, 1fr)); */
    gap: 10px;
-
 }
 
 /* ------------------- LOADER CSS ------------------- */
@@ -60,3 +60,89 @@
       transform: translateY(0px)
    }
 }
+
+.read__more {
+   position: fixed;
+   background-color: rgba(255, 255, 255, 0.258);
+   height: 100vh;
+   width: 90%;
+   top: 0;
+   right: 0;
+   backdrop-filter: blur(16px);
+   z-index: 22222;
+}
+
+.swipe {
+   transform: translateX(200%);
+}
+
+.bg-danger {
+   width: 50px;
+   margin: 10px;
+}
+
+.bookmark {
+   position: fixed;
+   background-color: rgba(255, 255, 255, 0.258);
+   height: 100vh;
+   width: 25%;
+   top: 0;
+   right: 0;
+   backdrop-filter: blur(16px);
+   z-index: 22222;
+}
+
+/* .animate {
+   animation-name: animateModal;
+   animation-duration: 1s;
+   animation-timing-function: ease-in;
+   animation-iteration-count: 1;
+   animation-fill-mode: forwards;
+   animation-direction: alternate;
+}
+
+@keyframes animateModal {
+   0% {
+      transform: translate(1px, 1px) rotate(0deg);
+   }
+
+   10% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+   }
+
+   20% {
+      transform: translate(-3px, 0px) rotate(1deg);
+   }
+
+   30% {
+      transform: translate(3px, 2px) rotate(0deg);
+   }
+
+   40% {
+      transform: translate(1px, -1px) rotate(1deg);
+   }
+
+   50% {
+      transform: translate(-1px, 2px) rotate(-1deg);
+   }
+
+   60% {
+      transform: translate(-3px, 1px) rotate(0deg);
+   }
+
+   70% {
+      transform: translate(3px, 1px) rotate(-1deg);
+   }
+
+   80% {
+      transform: translate(-1px, -1px) rotate(1deg);
+   }
+
+   90% {
+      transform: translate(1px, 2px) rotate(0deg);
+   }
+
+   100% {
+      transform: translate(1px, -2px) rotate(-1deg);
+   }
+} */
